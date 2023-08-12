@@ -1,15 +1,15 @@
 name: genius_flutter
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: ">=3.0.5 <4.0.0"
 
 dependencies:
+  beep_player: ^0.0.1
   flutter:
     sdk: flutter
-  flutter_beep: ^1.0.0
   get: ^4.6.5
 
 dev_dependencies:
@@ -19,3 +19,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/beep-06.wav

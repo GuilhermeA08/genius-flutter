@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genius_flutter/controllers/game_controller.dart';
+import 'package:genius_flutter/utils/utils.dart';
 import 'package:get/get.dart';
 
 import 'components/game_square.dart';
@@ -20,7 +21,7 @@ class GamePage extends StatelessWidget {
               onPressed: () => Get.back(), child: const Icon(Icons.arrow_back)),
           Obx(() => Text('Pontuação: ${gameController.score.value}')),
           ElevatedButton(
-              onPressed: () => gameController.playButtonAnimation(0),
+              onPressed: () => gameController.runGame(),
               child: const Text('Jogar')),
           const SizedBox(
             height: 40,
@@ -31,14 +32,14 @@ class GamePage extends StatelessWidget {
             children: [
               Obx(() => GameSquare(
                     color: gameController.color_red.value,
-                    onTap: () => gameController.redOnTap(),
+                    onTap: () => gameController.onTapButton(ColorButton.red),
                   )),
               const SizedBox(
                 width: 20,
               ),
               Obx(() => GameSquare(
                     color: gameController.color_blue.value,
-                    onTap: () => gameController.blueOnTap(),
+                    onTap: () => gameController.onTapButton(ColorButton.blue),
                   )),
             ],
           ),
@@ -51,14 +52,14 @@ class GamePage extends StatelessWidget {
             children: [
               Obx(() => GameSquare(
                     color: gameController.color_green.value,
-                    onTap: () => gameController.greenOnTap(),
+                    onTap: () => gameController.onTapButton(ColorButton.green),
                   )),
               const SizedBox(
                 width: 20,
               ),
               Obx(() => GameSquare(
                     color: gameController.color_yellow.value,
-                    onTap: () => gameController.yellowOnTap(),
+                    onTap: () => gameController.onTapButton(ColorButton.yellow),
                   )),
             ],
           )
