@@ -28,12 +28,12 @@ class GameController extends GetxController {
 
   var score = 0.obs;
 
-  var color_red = Colors.red[500].obs;
-  var color_blue = Colors.blue[500].obs;
-  var color_green = Colors.green[500].obs;
-  var color_yellow = Colors.yellow[500].obs;
+  var colorRed = Colors.red[800].obs;
+  var colorBlue = Colors.blue[800].obs;
+  var colorGreen = Colors.green[800].obs;
+  var colorYellow = Colors.yellow[800].obs;
 
-  List<ColorButton> sequence = [ColorButton.red];
+  List<ColorButton> sequence = [];
 
   // Iterator de sequence
   late Iterator<ColorButton> sequenceIterator;
@@ -72,28 +72,28 @@ class GameController extends GetxController {
   Future<void> onTapButton(ColorButton colorButton) async {
     switch (colorButton) {
       case ColorButton.red:
-        this.color_red.value = Color.fromARGB(255, 255, 0, 0);
+        colorRed.value = const Color.fromARGB(255, 255, 50, 50);
         playSound();
         await esperarPorSegundos(0, milliseconds: 500);
-        this.color_red.value = Colors.red[500];
+        colorRed.value = Colors.red[900];
         break;
       case ColorButton.blue:
-        this.color_blue.value = Color.fromARGB(255, 0, 21, 255);
+        colorBlue.value = const Color.fromARGB(255, 0, 180, 255);
         playSound();
         await esperarPorSegundos(0, milliseconds: 500);
-        this.color_blue.value = Colors.blue[500];
+        colorBlue.value = Colors.blue[800];
         break;
       case ColorButton.green:
-        this.color_green.value = Color.fromARGB(255, 4, 255, 0);
+        colorGreen.value = const Color.fromARGB(255, 30, 210, 70);
         playSound();
         await esperarPorSegundos(0, milliseconds: 500);
-        this.color_green.value = Colors.green[500];
+        colorGreen.value = Colors.green[800];
         break;
       case ColorButton.yellow:
-        this.color_yellow.value = Color.fromARGB(255, 246, 255, 0);
+        colorYellow.value = const Color.fromARGB(255, 255, 255, 80);
         playSound();
         await esperarPorSegundos(0, milliseconds: 500);
-        this.color_yellow.value = Colors.yellow[500];
+        colorYellow.value = Colors.yellow[800];
         break;
       default:
     }

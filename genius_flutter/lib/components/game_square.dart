@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class GameSquare extends StatelessWidget {
@@ -12,12 +11,13 @@ class GameSquare extends StatelessWidget {
     return Material(
       color: color,
       child: InkWell(
-          onTap: onTap,
-          child: Container(
-            width: 100,
-            height: 100,
-            color: Colors.transparent,
-          )),
+        onTap: onTap,
+        child: Container(
+          width: 160,
+          height: 160,
+          color: Colors.transparent,
+        )
+      ),
     );
   }
 }
