@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   beep_player: ^0.0.1
+  collection: ^1.17.1
   flutter:
     sdk: flutter
   get: ^4.6.5
@@ -21,3 +22,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/beep-06.wav
+    - assets/genius-logo.png

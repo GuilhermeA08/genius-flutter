@@ -23,10 +23,28 @@ class MainApp extends StatelessWidget {
       ),
       home: Scaffold(
         body: Center(
-          child: ElevatedButton(
-            onPressed: () => Get.to(const GamePage()),
-            child: const Text('Começar o jogo')
-          )
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 200,
+              ),
+              Image.asset('assets/genius-logo.png'),
+              const Text(
+                'GENIUS',
+                style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(const GamePage()),
+                child: const Text(
+                  'Começar o jogo',
+                  style: TextStyle(fontSize: 20),
+                )
+              ),
+            ],
+          ),
         ),
       ),
     );

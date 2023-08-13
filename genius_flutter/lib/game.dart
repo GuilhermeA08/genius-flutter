@@ -20,35 +20,58 @@ class GamePage extends StatelessWidget {
               height: 80,
             ),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(
                   width: 20,
                 ),
                 ElevatedButton(
-                  onPressed: () => Get.back(), child: const Icon(Icons.arrow_back)
-                )
+                  onPressed: () => Get.back(),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    size: 30,
+                  ),
+                ),
               ],
             ),
             const SizedBox(
-              height: 40,
+              height: 30,
+            ),
+            Obx(() => Text(
+                gameController.helperText.value,
+                style: const TextStyle(fontSize: 20),
+              )
+            ),
+            const SizedBox(
+              height: 30,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(
+                  height: 40,
+                ),
                 Obx(() => GameSquare(
-                      color: gameController.colorRed.value,
-                      onTap: () => gameController.onTapButton(ColorButton.red),
-                    )),
+                    color: gameController.colorRed.value,
+                    onTap: () => {
+                      gameController.onTapButton(ColorButton.red),
+                      gameController.onUserTap(ColorButton.red)
+                    }
+                  )
+                ),
                 const SizedBox(
                   width: 20,
                 ),
                 Obx(() => GameSquare(
-                      color: gameController.colorBlue.value,
-                      onTap: () => gameController.onTapButton(ColorButton.blue),
-                    )),
+                    color: gameController.colorBlue.value,
+                    onTap: () => {
+                      gameController.onTapButton(ColorButton.blue),
+                      gameController.onUserTap(ColorButton.blue)
+                    }
+                  )
+                ),
               ],
             ),
             const SizedBox(
@@ -59,15 +82,22 @@ class GamePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Obx(() => GameSquare(
-                      color: gameController.colorGreen.value,
-                      onTap: () => gameController.onTapButton(ColorButton.green),
-                    )),
+                    color: gameController.colorGreen.value,
+                    onTap: () => {
+                      gameController.onTapButton(ColorButton.green),
+                      gameController.onUserTap(ColorButton.green)
+                    }
+                  )
+                ),
                 const SizedBox(
                   width: 20,
                 ),                
                 Obx(() => GameSquare(
-                      color: gameController.colorYellow.value,
-                      onTap: () => gameController.onTapButton(ColorButton.yellow),
+                    color: gameController.colorYellow.value,
+                    onTap: () => {
+                      gameController.onTapButton(ColorButton.yellow),
+                      gameController.onUserTap(ColorButton.yellow)
+                    }
                   )
                 ),
               ],
@@ -80,13 +110,20 @@ class GamePage extends StatelessWidget {
               height: 50,
               child: ElevatedButton(
                 onPressed: () => gameController.runGame(),
-                child: const Text('Jogar'),
+                child: const Text(
+                  'Jogar',
+                  style: TextStyle(fontSize: 20),
+                )
               ),
             ),
             const SizedBox(
-              height: 80,
+              height: 40,
             ),
-            Obx(() => Text('Pontuação: ${gameController.score.value}')),
+            Obx(() => Text(
+                'Pontuação: ${gameController.score.value}',
+                style: const TextStyle(fontSize: 20),
+              )
+            ),
             const SizedBox(
               height: 40,
             ),

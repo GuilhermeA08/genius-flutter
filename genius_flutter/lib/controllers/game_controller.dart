@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:beep_player/beep_player.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:genius_flutter/utils/utils.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,10 @@ class GameController extends GetxController {
     BeepPlayer.play(_beepFile);
   }
 
+  var cont = 0;
   var score = 0.obs;
+  var phaseNumber = 1;
+  var helperText = "".obs;
 
   var colorRed = Colors.red[800].obs;
   var colorBlue = Colors.blue[800].obs;
@@ -34,6 +38,7 @@ class GameController extends GetxController {
   var colorYellow = Colors.yellow[800].obs;
 
   List<ColorButton> sequence = [];
+  List<ColorButton> informedSequence = [];
 
   // Iterator de sequence
   late Iterator<ColorButton> sequenceIterator;
@@ -43,7 +48,7 @@ class GameController extends GetxController {
   }
 
   void increment() {
-    score++;
+    score += phaseNumber++;
   }
 
   ColorButton getRandColor() {
@@ -51,22 +56,44 @@ class GameController extends GetxController {
     return ColorButton.values[rand.nextInt(4)];
   }
 
-  void playSequence() async {
+  Future<void> playSequence() async {
     for (var color in sequence) {
       await esperarPorSegundos(1, milliseconds: 500);
       onTapButton(color);
     }
   }
 
-  bool checkSequence() {
-    sequenceIterator.current;
-    return true;
+  Future<void> compareSequences() async {
+    if(cont == sequence.length) {
+      if(const ListEquality().equals(sequence, informedSequence)) {
+        helperText.value = "Você acertou!";
+        increment();
+        await esperarPorSegundos(2);
+        helperText.value = "";
+        runGame();
+      } else {
+        helperText.value = "Você perdeu!";
+        score.value = 0;
+        await esperarPorSegundos(2);
+        helperText.value = "";
+        Get.back();
+      }
+      cont = 0;
+      informedSequence = [];
+    }
+  }
+
+  Future<void> onUserTap(ColorButton colorButton) async {
+    informedSequence.add(colorButton);
+    cont++;
+    compareSequences();
   }
 
   void runGame() async {
     sequence.add(getRandColor());
-    playSequence();
-    debugPrint("$sequence");
+    await playSequence();
+    await esperarPorSegundos(2);
+    helperText.value = "Sua vez!";
   }
 
   Future<void> onTapButton(ColorButton colorButton) async {
