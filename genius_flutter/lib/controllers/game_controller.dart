@@ -31,6 +31,8 @@ class GameController extends GetxController {
   var score = 0.obs;
   var phaseNumber = 1;
   var helperText = "".obs;
+  var showPlayButton = true.obs;
+  var blockTouchSquare = true.obs;
 
   var colorRed = Colors.red[800].obs;
   var colorBlue = Colors.blue[800].obs;
@@ -68,13 +70,14 @@ class GameController extends GetxController {
       if(const ListEquality().equals(sequence, informedSequence)) {
         helperText.value = "Você acertou!";
         increment();
-        await esperarPorSegundos(2);
+        await esperarPorSegundos(1, milliseconds: 500);
         helperText.value = "";
+        blockTouchSquare.value = true;
         runGame();
       } else {
         helperText.value = "Você perdeu!";
         score.value = 0;
-        await esperarPorSegundos(2);
+        await esperarPorSegundos(1, milliseconds: 500);
         helperText.value = "";
         Get.back();
       }
@@ -92,8 +95,9 @@ class GameController extends GetxController {
   void runGame() async {
     sequence.add(getRandColor());
     await playSequence();
-    await esperarPorSegundos(2);
+    await esperarPorSegundos(1);
     helperText.value = "Sua vez!";
+    blockTouchSquare.value = false;
   }
 
   Future<void> onTapButton(ColorButton colorButton) async {

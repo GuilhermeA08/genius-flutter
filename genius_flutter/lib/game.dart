@@ -56,8 +56,10 @@ class GamePage extends StatelessWidget {
                 Obx(() => GameSquare(
                     color: gameController.colorRed.value,
                     onTap: () => {
-                      gameController.onTapButton(ColorButton.red),
-                      gameController.onUserTap(ColorButton.red)
+                      gameController.blockTouchSquare.value ? null : (
+                        gameController.onTapButton(ColorButton.red),
+                        gameController.onUserTap(ColorButton.red)
+                      ),
                     }
                   )
                 ),
@@ -67,8 +69,10 @@ class GamePage extends StatelessWidget {
                 Obx(() => GameSquare(
                     color: gameController.colorBlue.value,
                     onTap: () => {
-                      gameController.onTapButton(ColorButton.blue),
-                      gameController.onUserTap(ColorButton.blue)
+                      gameController.blockTouchSquare.value ? null : (
+                        gameController.onTapButton(ColorButton.blue),
+                        gameController.onUserTap(ColorButton.blue)
+                      ),
                     }
                   )
                 ),
@@ -84,8 +88,10 @@ class GamePage extends StatelessWidget {
                 Obx(() => GameSquare(
                     color: gameController.colorGreen.value,
                     onTap: () => {
-                      gameController.onTapButton(ColorButton.green),
-                      gameController.onUserTap(ColorButton.green)
+                      gameController.blockTouchSquare.value ? null : (
+                        gameController.onTapButton(ColorButton.green),
+                        gameController.onUserTap(ColorButton.green)
+                      ),
                     }
                   )
                 ),
@@ -95,8 +101,10 @@ class GamePage extends StatelessWidget {
                 Obx(() => GameSquare(
                     color: gameController.colorYellow.value,
                     onTap: () => {
-                      gameController.onTapButton(ColorButton.yellow),
-                      gameController.onUserTap(ColorButton.yellow)
+                      gameController.blockTouchSquare.value ? null : (
+                        gameController.onTapButton(ColorButton.yellow),
+                        gameController.onUserTap(ColorButton.yellow)
+                      ),
                     }
                   )
                 ),
@@ -105,24 +113,30 @@ class GamePage extends StatelessWidget {
             const SizedBox(
               height: 40,
             ),
-            SizedBox(
-              width: 100,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () => gameController.runGame(),
-                child: const Text(
-                  'Jogar',
-                  style: TextStyle(fontSize: 20),
-                )
-              ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
             Obx(() => Text(
                 'Pontuação: ${gameController.score.value}',
                 style: const TextStyle(fontSize: 20),
               )
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            SizedBox(
+              width: 100,
+              height: 50,
+              child: Obx(() => Visibility(
+                visible: gameController.showPlayButton.value,
+                child: ElevatedButton(
+                  onPressed: () => {
+                    gameController.showPlayButton.value = false,
+                    gameController.runGame(),
+                  },
+                  child: const Text(
+                    'Jogar',
+                    style: TextStyle(fontSize: 20),
+                  )
+                ),
+              )),
             ),
             const SizedBox(
               height: 40,
