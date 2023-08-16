@@ -74,13 +74,8 @@ class GameController extends GetxController {
         helperText.value = "";
         blockTouchSquare.value = true;
         runGame();
-      } else {
-        helperText.value = "Você perdeu!";
-        score.value = 0;
-        await esperarPorSegundos(1, milliseconds: 500);
-        helperText.value = "";
-        Get.back();
       }
+
       cont = 0;
       informedSequence = [];
     }
@@ -88,6 +83,15 @@ class GameController extends GetxController {
 
   Future<void> onUserTap(ColorButton colorButton) async {
     informedSequence.add(colorButton);
+
+    if(informedSequence[cont] != sequence[cont]) {
+      helperText.value = "Você perdeu!";
+      score.value = 0;
+      await esperarPorSegundos(1, milliseconds: 500);
+      helperText.value = "";
+      Get.back();
+    }
+
     cont++;
     compareSequences();
   }
